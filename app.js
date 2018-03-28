@@ -9,10 +9,13 @@ app.get('/posts', (req, res) => {
   // TODO -- await the array of posts (or error) from getPost
   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1')
   res.send(req.query.original)
-  const getInfo = async () => {
-    console.log(await axios.get('https://jsonplaceholder.typicode.com/posts'))
-   }
-   getInfo();
+  router.get('https://jsonplaceholder.typicode.com/posts', async (req, res, next) => {
+    try {
+      getPost()
+    } catch (error) {
+      console.log(error) 
+    }
+  })
   res.send('Hello!') 
   // TODO -- Use an HTML templating engine to feed in the list of posts and do the basic formatting
 })
